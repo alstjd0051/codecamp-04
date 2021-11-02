@@ -90,7 +90,6 @@ export const Content_box = styled.div`
 height: 14rem;
 width: 996px;
 margin-left: 7rem;
-margin-top: 14rem;
 border-radius: 0px;
 
 `
@@ -132,6 +131,19 @@ export const Address_num = styled.input`
   margin-top: 1rem;
   color: #BDBDBD;
   box-sizing: border-box;
+`
+export const Zipcodeserch = styled.button`
+  width: 124px;
+  height: 52px;
+  align-items: center;
+  background: #000000;
+  color: #ffffff;
+  text-align: center;
+  justify-content: space-around;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  margin-left: 12px;
 `
 export const Address_add = styled.input`
   width: 996px;
@@ -199,6 +211,11 @@ export const Upload_picture1 = styled.div`
   width: 78px;
   height: 78px;
   background: #BDBDBD;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
 `
 
 export const MainSetting = styled.div`
@@ -217,18 +234,18 @@ export const SettingTitle = styled.div`
 export const SettingRadio = styled.input`
   font-size: 20px;
   margin-top: 1rem;
-  background-color: yellow;
+  background: yellow;
 `
 
-export const Cancel = styled.button`
+/* export const Cancel = styled.button`
 width: 179px;
 height: 52px;
 justify-content: center;
 background: #bdbdbd;
 display: block;
 text-align: center;
-`
-export const Adjust = styled.button`
+` */
+export const Registration = styled.button`
 width: 179px;
 height: 52px;
 justify-content: space-between;
@@ -236,4 +253,6 @@ background: #ffd600;
 display: block;
 text-align: center;
 margin-left: 5rem;
+font-size: 16px;
+cursor: pointer;
 `

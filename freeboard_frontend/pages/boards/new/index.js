@@ -1,9 +1,29 @@
 // export default 해서 만들기!!!() - class 보고 따라만들기
 
-import React from 'react'
-import { BGRound, Header, TopBox, PreparingInput, Preparing, Password_box, Password, PasswordInput, TitleBox, TitleBox_input, TitleText, Content_box, Content_title, Content__box, Address, Address_title, Youtube_box, Youtube_title, Youtube_addr, Address_num, Address_add, Youtube_details, Picture, PictureTitle, Upload_picture1, Upload, MainSetting, SettingTitle, SettingRadio, Cancel, Adjust } from '../../../styles/port'
+import React, { useState } from 'react'
+import { BGRound, Header, TopBox, PreparingInput, Preparing, Password_box, Password, PasswordInput, TitleBox, TitleBox_input, TitleText, Content_box, Content_title, Content__box, Address, Address_title, Youtube_box, Youtube_title, Youtube_addr, Address_num, Address_add, Youtube_details, Picture, PictureTitle, Upload_picture1, Upload, MainSetting, SettingTitle, SettingRadio, Registration, Zipcodeserch } from '../../../styles/port'
 
 function index() {
+
+  const [errorName, setErrorName] = useState()
+
+  function name() {
+    console.log(object)
+    
+  }
+
+  function named__() {
+    console.log('작성자를 입력하세요')
+
+  }
+
+  function register() {
+
+    if (errorName.includes('') === false) {
+      setErrorName('작성자를 다시 입력해주세요')
+    }
+  }
+
   return (
     <>
       <BGRound>
@@ -11,7 +31,8 @@ function index() {
 
 
         <TopBox>
-          <Preparing>작성자</Preparing>
+          <Preparing onChange={name}>작성자</Preparing>
+          <div style={{ color: "red" }}>{errorName}</div>
           <PreparingInput type="text" placeholder="이름을 적어주세요" />
           <Password>비밀번호</Password>
           <PasswordInput type="password" placeholder="비밀번호를 입력해주세요" />
@@ -30,6 +51,7 @@ function index() {
         <Address>
           <Address_title>주소</Address_title>
           <Address_num type="number" placeholder="07250" />
+          <Zipcodeserch>우편번호 검색</Zipcodeserch>
           <Address_add type="text" />
           <Youtube_details type="text" />
         </Address>
@@ -42,9 +64,9 @@ function index() {
         <Picture>
           <PictureTitle>사진첨부</PictureTitle>
           <Upload>
-            <Upload_picture1 />
-            <Upload_picture1 />
-            <Upload_picture1 />
+            <Upload_picture1><div>+</div>Upload</Upload_picture1>
+            <Upload_picture1><div>+</div>Upload</Upload_picture1>
+            <Upload_picture1><div>+</div>Upload</Upload_picture1>
           </Upload>
         </Picture>
 
@@ -56,8 +78,8 @@ function index() {
           <label htmlFor="picture" >사진</label>
         </MainSetting>
         <div style={{ display: "flex", justifyContent: "center" }}>
-          <Cancel>취소하기</Cancel>
-          <Adjust>수정하기</Adjust>
+          {/* <Cancel>취소하기</Cancel> */}
+          <Registration onClick={register}>등록하기</Registration>
 
         </div>
 
