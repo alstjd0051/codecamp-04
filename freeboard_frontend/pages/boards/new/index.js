@@ -14,7 +14,7 @@ import {
   SubmitButton,
   Title,
   Wrapper,
-  Writer,
+  Writer, 
   WriterWrapper,
   Youtube,
   Zipcode,
