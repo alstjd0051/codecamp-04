@@ -6,7 +6,7 @@ const FETCH_PRODUCT = gql`
     fetchProduct(productId: $productId){
       seller
       name
-      price
+      price 
       detail
       # 버튼이 주석
       
