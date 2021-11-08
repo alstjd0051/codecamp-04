@@ -5,7 +5,7 @@ export default function CounterStatePage() {
   const [qqq, setQqq] = useState(0);
 
   function zzz() {
-    setQqq(qqq + 1)
+    setQqq(qqq++)
   }
 
   return (

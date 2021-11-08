@@ -16,12 +16,11 @@ export default function DynamicRoutingPage() {
   }
 
   return (
-    <div>
-
+    <>
       <Button1 onClick={onClickMove1}>1번 게시글로 이동하기</Button1>
       <Button2 onClick={onClickMove2}>2번 게시글로 이동하기</Button2>
       <Button3 onClick={onClickMove3}>3번 게시글로 이동하기</Button3>
-    </div>
+    </>
   )
 }
 
