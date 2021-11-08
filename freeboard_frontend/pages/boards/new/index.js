@@ -21,7 +21,7 @@ import {
   ZipcodeWrapper,
   UploadButton,
   Error
-} from "../../../styles/BoardsNew";
+} from "../../../styles/port";
 import { useState } from 'react'
 import { useMutation, gql } from "@apollo/client";
 
