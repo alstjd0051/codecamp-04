@@ -1,4 +1,4 @@
-import { getDate } from '../../../../commons/libraries/utils'
+import { getDate } from "../../../../commons/libraries/utils";
 import {
   Wrapper,
   TableTop,
@@ -14,15 +14,6 @@ import {
 } from "./BoardList.styles";
 
 export default function BoardListUI(props) {
-
-
-  const aaa = new Date()
-  console.log(aaa.getFullYear())
-  console.log(aaa.getMonth() + 1)
-  console.log(aaa.getDate())
-
-
-
   return (
     <Wrapper>
       <TableTop />
