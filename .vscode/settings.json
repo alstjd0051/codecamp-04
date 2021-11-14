@@ -1,5 +1,4 @@
 {
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode" // 줄이 안맞았을때 자동으로 세팅
-  
 }

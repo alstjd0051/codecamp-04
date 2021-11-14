@@ -35,6 +35,7 @@
     "eslint-plugin-promise": "^5.1.1",
     "eslint-plugin-react": "^7.27.0",
     "husky": "4",
+    "lint-staged": "^11.2.6",
     "prettier": "2.4.1"
   },
   "husky": {

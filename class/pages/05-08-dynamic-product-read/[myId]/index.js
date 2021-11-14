@@ -1,29 +1,27 @@
-import { useRouter } from "next/router"
-import { useQuery, gql } from '@apollo/client'
+import { useRouter } from "next/router";
+import { useQuery, gql } from "@apollo/client";
 
 const FETCH_PRODUCT = gql`
-  query fetchProduct($productId: ID){
-    fetchProduct(productId: $productId){
+  query fetchProduct($productId: ID) {
+    fetchProduct(productId: $productId) {
       seller
       name
-      price 
+      price
       detail
       # 버튼이 주석
-      
     }
   }
-`
-
+`;
 
 export default function DynamicProductReadPage() {
-
-  const router = useRouter()
+  const router = useRouter();
 
   const { data } = useQuery(FETCH_PRODUCT, {
-    variables: { productId: router.query.myId }
-  })
+    variables: { productId: router.query.myId },
+  });
+  const { data: data2 } = useQuery(FETCH_PRODUCT_COMMENT, {variables: { productId: router.query.myId },});
 
-  console.log(data)
+  console.log(data);
 
   return (
     <>
@@ -33,10 +31,9 @@ export default function DynamicProductReadPage() {
       <div>상품상세 : {data?.fetchProduct.detail}</div>
       <div>상품가`격 : {data?.fetchProduct.price}</div>
       {/* 주석 */}
-
     </>
-  )
+  );
 }
-//?.옵셔널체이닝
-//삼항연산자 
+// ?.옵셔널체이닝
+// 삼항연산자
 // ?true : false
