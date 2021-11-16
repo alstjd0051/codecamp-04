@@ -41,11 +41,6 @@
     "lint-staged": "^11.2.6",
     "prettier": "2.4.1"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "**/*.{ts,tsx}": [
       "npx eslint .",
