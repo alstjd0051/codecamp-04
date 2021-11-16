@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1>Hello</h1>
+        <h1>안녕 나는 민성이라해</h1>
 
 
 
