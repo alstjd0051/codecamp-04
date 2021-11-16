@@ -1,3 +1,4 @@
+import styled from "@emotion/styled";
 import {
   Address,
   ButtonWrapper,
@@ -22,7 +23,10 @@ import {
   UploadButton,
   Error,
 } from "./BoardWrite.styles";
+
+import { Button, Modal } from "antd";
 import { IBoardWriteUIProps } from "./BoardWrite.types";
+import DaumPostcode from "react-daum-postcode";
 
 export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
@@ -67,8 +71,16 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
       <InputWrapper>
         <Label>주소</Label>
         <ZipcodeWrapper>
-          <Zipcode placeholder="07250" readOnly />
-          <SearchButton>우편번호 검색</SearchButton>
+          <Zipcode readOnly />
+          <SearchButton onClick={props.onClickAdd}>우편번호 검색</SearchButton>
+          {/* <Modal
+            visible={true}
+            onOk={props.handleOk}
+            onCancel={props.handleCancel}
+          >
+            <DaumPostcode onComplete={props.handleComplete} />
+          </Modal> */}
+          ;
         </ZipcodeWrapper>
         <Address readOnly />
         <Address />

@@ -23,6 +23,7 @@ export interface IBoardWriteUIProps {
   onChangeMyYoutubeUrl: (event: ChangeEvent<HTMLInputElement>) => void;
   onClickSubmit: () => void;
   onClickUpdate: () => void;
+  onClickAdd: () => void;
   isActive: boolean;
   isEdit?: boolean;
   data?: any;

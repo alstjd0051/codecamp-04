@@ -4,6 +4,8 @@ import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { IBoardWriteProps, IMyUpdateBoardInput } from "./BoardWrite.types";
+import DaumPostcode from "react-daum-postcode";
+import { Modal } from "antd";
 
 export default function BoardWrite(props: IBoardWriteProps) {
   const router = useRouter();
@@ -23,6 +25,28 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
+
+  const [openAdd, setAdd] = useState(false);
+  const [userAdd, setUserAdd] = useState(false);
+  const [userpost, setUserPost] = useState(false);
+
+  const handleCancel = () => {
+    setAdd(false);
+  };
+  const handleOk = () => {
+    setAdd(false);
+  };
+  const showModal = () => {
+    setAdd(true);
+  };
+
+  const handleComplete = (data: any) => {
+    // console.log(data);
+
+    setUserAdd(data.address);
+    setUserPost(data.zonecode);
+    setAdd(false);
+  };
 
   function onChangeMyWriter(event: ChangeEvent<HTMLInputElement>) {
     setMyWriter(event.target.value);
@@ -150,8 +174,12 @@ export default function BoardWrite(props: IBoardWriteProps) {
       });
       router.push(`/boards/${router.query.boardId}`);
     } catch (error) {
-      alert(error.message);
+      if (error instanceof Error) alert(error.message);
     }
+  }
+
+  function onClickAdd() {
+    setAdd(true);
   }
 
   return (
@@ -167,6 +195,9 @@ export default function BoardWrite(props: IBoardWriteProps) {
       onChangeMyYoutubeUrl={onChangeMyYoutubeUrl}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
+      onClickAdd={onClickAdd}
+      handleCancel={handleCancel}
+      handleOk={handleOk}
       isActive={isActive}
       isEdit={props.isEdit}
       data={props.data}

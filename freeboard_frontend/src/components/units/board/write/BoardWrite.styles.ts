@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { ISubmitButtonProps } from './BoardWrite.types'
+import { Button } from "antd";
+import { ISubmitButtonProps } from "./BoardWrite.types";
 
 export const Wrapper = styled.div`
   width: 1200px;
@@ -82,7 +83,7 @@ export const Zipcode = styled.input`
   border: 1px solid #bdbdbd;
 `;
 
-export const SearchButton = styled.button`
+export const SearchButton = styled(Button)`
   width: 124px;
   height: 52px;
   margin-left: 16px;
@@ -164,10 +165,12 @@ export const SubmitButton = styled.button`
   font-weight: 500;
   margin-left: 12px;
   margin-right: 12px;
-  background-color: ${(props: ISubmitButtonProps) => props.isActive ? 'yellow' : 'none'};
-  
+  background-color: ${(props: ISubmitButtonProps) =>
+    props.isActive ? "yellow" : "none"};
+
   :hover {
-    cursor: ${(props: ISubmitButtonProps) => props.isActive ? 'pointer' : 'default'};
+    cursor: ${(props: ISubmitButtonProps) =>
+      props.isActive ? "pointer" : "default"};
   }
 `;
 
