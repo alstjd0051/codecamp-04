@@ -5,9 +5,6 @@ export default function StatePrevPage() {
 
   function onClickCounter() {
     setCount((prev) => prev + 1);
-    setCount((prev) => prev + 1);
-    setCount((prev) => prev + 1);
-
 
     console.log(count + 1);
   }
