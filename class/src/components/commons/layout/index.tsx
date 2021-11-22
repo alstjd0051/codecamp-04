@@ -19,6 +19,7 @@ const Wrapper = styled.div`
 
 const Body = styled.div`
   background-color: brown;
+  width: 1000px;
 `;
 
 const BodyWrapper = styled.div`
