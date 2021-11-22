@@ -4,8 +4,6 @@ import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { IBoardWriteProps, IMyUpdateBoardInput } from "./BoardWrite.types";
-import DaumPostcode from "react-daum-postcode";
-import { Modal } from "antd";
 
 export default function BoardWrite(props: IBoardWriteProps) {
   const router = useRouter();
@@ -15,6 +13,9 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [myTitle, setMyTitle] = useState("");
   const [myContents, setMyContents] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
 
   const [myWriterError, setMyWriterError] = useState("");
   const [myPasswordError, setMyPasswordError] = useState("");
@@ -22,31 +23,10 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [myContentsError, setMyContentsError] = useState("");
 
   const [isActive, setIsActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const [createBoard] = useMutation(CREATE_BOARD);
   const [updateBoard] = useMutation(UPDATE_BOARD);
-
-  const [openAdd, setAdd] = useState(false);
-  const [userAdd, setUserAdd] = useState(false);
-  const [userpost, setUserPost] = useState(false);
-
-  const handleCancel = () => {
-    setAdd(false);
-  };
-  const handleOk = () => {
-    setAdd(false);
-  };
-  const showModal = () => {
-    setAdd(true);
-  };
-
-  const handleComplete = (data: any) => {
-    // console.log(data);
-
-    setUserAdd(data.address);
-    setUserPost(data.zonecode);
-    setAdd(false);
-  };
 
   function onChangeMyWriter(event: ChangeEvent<HTMLInputElement>) {
     setMyWriter(event.target.value);
@@ -124,6 +104,20 @@ export default function BoardWrite(props: IBoardWriteProps) {
     setYoutubeUrl(event.target.value);
   }
 
+  function onChangeAddressDetail(event: ChangeEvent<HTMLInputElement>) {
+    setAddressDetail(event.target.value);
+  }
+
+  function onClickAddressSearch() {
+    setIsOpen(true);
+  }
+
+  function onCompleteAddressSearch(data: any) {
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+    setIsOpen(false);
+  }
+
   async function onClickSubmit() {
     if (!myWriter) {
       setMyWriterError("작성자를 입력해주세요.");
@@ -146,6 +140,11 @@ export default function BoardWrite(props: IBoardWriteProps) {
             title: myTitle,
             contents: myContents,
             youtubeUrl: youtubeUrl,
+            boardAddress: {
+              zipcode: zipcode,
+              address: address,
+              addressDetail: addressDetail,
+            },
           },
         },
       });
@@ -154,7 +153,14 @@ export default function BoardWrite(props: IBoardWriteProps) {
   }
 
   async function onClickUpdate() {
-    if (!myTitle && !myContents && !youtubeUrl) {
+    if (
+      !myTitle &&
+      !myContents &&
+      !youtubeUrl &&
+      !address &&
+      !addressDetail &&
+      !zipcode
+    ) {
       alert("수정된 내용이 없습니다.");
       return;
     }
@@ -163,6 +169,13 @@ export default function BoardWrite(props: IBoardWriteProps) {
     if (myTitle) myUpdateboardInput.title = myTitle;
     if (myContents) myUpdateboardInput.contents = myContents;
     if (youtubeUrl) myUpdateboardInput.youtubeUrl = youtubeUrl;
+    if (zipcode || address || addressDetail) {
+      myUpdateboardInput.boardAddress = {};
+      if (zipcode) myUpdateboardInput.boardAddress.zipcode = zipcode;
+      if (address) myUpdateboardInput.boardAddress.address = address;
+      if (addressDetail)
+        myUpdateboardInput.boardAddress.addressDetail = addressDetail;
+    }
 
     try {
       await updateBoard({
@@ -174,12 +187,8 @@ export default function BoardWrite(props: IBoardWriteProps) {
       });
       router.push(`/boards/${router.query.boardId}`);
     } catch (error) {
-      if (error instanceof Error) alert(error.message);
+      alert(error.message);
     }
-  }
-
-  function onClickAdd() {
-    setAdd(true);
   }
 
   return (
@@ -193,14 +202,18 @@ export default function BoardWrite(props: IBoardWriteProps) {
       onChangeMyTitle={onChangeMyTitle}
       onChangeMyContents={onChangeMyContents}
       onChangeMyYoutubeUrl={onChangeMyYoutubeUrl}
+      onChangeAddressDetail={onChangeAddressDetail}
       onClickSubmit={onClickSubmit}
       onClickUpdate={onClickUpdate}
-      onClickAdd={onClickAdd}
-      handleCancel={handleCancel}
-      handleOk={handleOk}
+      onClickAddressSearch={onClickAddressSearch}
+      onCompleteAddressSearch={onCompleteAddressSearch}
       isActive={isActive}
       isEdit={props.isEdit}
+      isOpen={isOpen}
       data={props.data}
+      zipcode={zipcode}
+      address={address}
+      addressDetail={addressDetail}
     />
   );
 }
