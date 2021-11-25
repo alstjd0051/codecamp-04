@@ -7,4 +7,5 @@ export const Wrapper = styled.div`
 export const SliderItem = styled.img`
   height: 350px;
   margin: auto;
+  
 `;
