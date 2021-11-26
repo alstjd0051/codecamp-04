@@ -1,4 +1,4 @@
-import BoardWriteUI from "./BoardWrite.presenter";
+import BoardWriteUI from "./BoardWrite.Presenter";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
 import { ChangeEvent, useState } from "react";
 import { useMutation } from "@apollo/client";
@@ -16,6 +16,8 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
+
+  const [images, setImages] = useState<string[]>([]);
 
   const [myWriterError, setMyWriterError] = useState("");
   const [myPasswordError, setMyPasswordError] = useState("");
@@ -117,6 +119,12 @@ export default function BoardWrite(props: IBoardWriteProps) {
     setZipcode(data.zonecode);
     setIsOpen(false);
   }
+  function handleOk() {
+    setIsOpen((prev) => !prev);
+  }
+  function handleCancel() {
+    setIsOpen((prev) => !prev);
+  }
 
   async function onClickSubmit() {
     if (!myWriter) {
@@ -140,6 +148,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
             title: myTitle,
             contents: myContents,
             youtubeUrl: youtubeUrl,
+            images,
             boardAddress: {
               zipcode: zipcode,
               address: address,
@@ -193,6 +202,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
 
   return (
     <BoardWriteUI
+      setImages={setImages}
       myWriterError={myWriterError}
       myPasswordError={myPasswordError}
       myTitleError={myTitleError}
@@ -214,6 +224,8 @@ export default function BoardWrite(props: IBoardWriteProps) {
       zipcode={zipcode}
       address={address}
       addressDetail={addressDetail}
+      handleOk={handleOk}
+      handleCancel={handleCancel}
     />
   );
 }

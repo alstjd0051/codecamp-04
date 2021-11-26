@@ -39,6 +39,8 @@ export interface IBoardWriteUIProps {
   zipcode: string;
   address: string;
   addressDetail: string;
+  handleOk: () => void;
+  handleCancel: () => void;
 }
 
 export interface ISubmitButtonProps {

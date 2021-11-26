@@ -8,14 +8,19 @@ export default function LayoutHeader() {
     router.push("/boards");
   }
 
-  function onClickMoveToLogin() {
-    router.push("/login");
+  function onClickMoveToSignin() {
+    router.push("/signin");
+  }
+
+  function onClickMoveToSignup() {
+    router.push("/signup");
   }
 
   return (
     <LayoutHeaderUI
       onClickLogo={onClickLogo}
-      onClickMoveToLogin={onClickMoveToLogin}
+      onClickMoveToSignin={onClickMoveToSignin}
+      onClickMoveToSignup={onClickMoveToSignup}
     />
   );
 }

@@ -99,7 +99,9 @@ export const IconWrapper = styled.div`
   text-align: center;
 `;
 
-export const LinkIcon = styled.img``;
+export const LinkIcon = styled.img`
+  margin-right: 30px;
+`;
 
 export const LocationIcon = styled.img``;
 

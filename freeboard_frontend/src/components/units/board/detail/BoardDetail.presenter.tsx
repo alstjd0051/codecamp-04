@@ -1,8 +1,12 @@
 import { Tooltip } from "antd";
+import { getDate } from "../../../../commons/libraries/utils";
 import * as S from "./BoardDetail.styles";
 import { IBoardDetailUIProps } from "./BoardDetail.types";
 
 export default function BoardDetailUI(props: IBoardDetailUIProps) {
+  console.log(
+    `https://storage.googleapis.com/${props.data?.fetchBoard.images[0]}`
+  );
   return (
     <S.Wrapper>
       <S.CardWrapper>
@@ -11,7 +15,9 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
             <S.Avatar src="/images/avatar.png" />
             <S.Info>
               <S.Writer>{props.data?.fetchBoard.writer}</S.Writer>
-              <S.CreatedAt>{props.data?.fetchBoard.createdAt}</S.CreatedAt>
+              <S.CreatedAt>
+                {getDate(props.data?.fetchBoard.createdAt)}
+              </S.CreatedAt>
             </S.Info>
           </S.AvatarWrapper>
           <S.IconWrapper>
@@ -27,6 +33,12 @@ export default function BoardDetailUI(props: IBoardDetailUIProps) {
         <S.Body>
           <S.Title>{props.data?.fetchBoard.title}</S.Title>
           <S.Contents>{props.data?.fetchBoard.contents}</S.Contents>
+
+          {/* 이미지 */}
+          <img
+            src={`https://storage.googleapis.com/${props.data?.fetchBoard.images[0]}`}
+          ></img>
+
           {props.data?.fetchBoard.youtubeUrl && (
             <S.Youtube
               url={props.data?.fetchBoard.youtubeUrl}

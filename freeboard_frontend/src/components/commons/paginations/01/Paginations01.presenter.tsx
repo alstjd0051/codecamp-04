@@ -1,10 +1,9 @@
-import { MouseEvent } from "react";
-import { Page } from "./Paginations01.styles";
+import { Page, PageWrapper } from "./Paginations01.styles";
 import { IPaginations01UIProps } from "./Paginations01.types";
 
 export default function Paginations01UI(props: IPaginations01UIProps) {
   return (
-    <div>
+    <PageWrapper>
       <Page onClick={props.onClickPrevPage}>{`<`}</Page>
       {new Array(10).fill(1).map(
         (_, index) =>
@@ -20,6 +19,6 @@ export default function Paginations01UI(props: IPaginations01UIProps) {
           )
       )}
       <Page onClick={props.onClickNextPage}>{`>`}</Page>
-    </div>
+    </PageWrapper>
   );
 }
