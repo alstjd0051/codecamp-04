@@ -1,6 +1,5 @@
-import React from 'react'
 
-export default function map_filter() {
+export default function MapFilter() {
 
   /* const classmates = [
     { name: '철수', age: "13" },
@@ -11,7 +10,7 @@ export default function map_filter() {
 
   console.log(aaa) */
 
-  const FRUITS = [
+  const fruites = [
     { number: 1, title: "레드향" }, // <div>1 레드향</div>
     { number: 2, title: "샤인머스켓" }, // <div>2 샤인머스켓</div>
     { number: 3, title: "산청딸기" }, // <div>3 산청딸기</div>

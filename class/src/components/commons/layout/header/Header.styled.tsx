@@ -4,5 +4,5 @@ export const Header = styled.div`
   padding: 20px;
   width: 100vh;
   height: 100%;
-  background-color: beige;
+  background-color: #ecec41;
 `;
