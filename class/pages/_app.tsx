@@ -14,6 +14,7 @@ import { createUploadLink } from "apollo-upload-client";
 // firebase 설정
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
+import { createContext, useState } from "react";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -32,14 +33,26 @@ const firebaseConfig = {
 // Initialize Firebase
 export const firebaseApp = initializeApp(firebaseConfig);
 
+export const GlobalContext = createContext(null);
+
 /* 
  img를 업데이트하기위해 apollo-upload-client설치
  typescript 설치 yarn add @types/apollo-upload-client 
  */
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [myAaccessToken, setMyAccessToken] = useState("");
+  const [myuserInfo, setMyUserInfo] = useState({});
+  const myValue = {
+    accessToken: myAaccessToken,
+    setAccessToken: setMyAccessToken,
+    userInfo: myuserInfo,
+    setUserInfo: setMyUserInfo,
+  };
+
   const uploadlink = createUploadLink({
     uri: "http://backend04.codebootcamp.co.kr/graphql",
+    headers: { authorization: `Bearer ${myAaccessToken}` },
   });
 
   const client = new ApolloClient({
@@ -47,12 +60,14 @@ function MyApp({ Component, pageProps }: AppProps) {
     cache: new InMemoryCache(), // state
   });
   return (
-    <ApolloProvider client={client}>
-      <Global styles={globalStyles} />
-      <Layout>
-        <Component {...pageProps} />
-      </Layout>
-    </ApolloProvider>
+    <GlobalContext.Provider value={myValue}>
+      <ApolloProvider client={client}>
+        <Global styles={globalStyles} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ApolloProvider>
+    </GlobalContext.Provider>
   );
 }
 
