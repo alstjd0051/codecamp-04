@@ -1,275 +1,235 @@
-import { useState, ChangeEvent } from "react";
-import { useMutation, useQuery } from "@apollo/client";
-import { useRouter } from "next/router";
 import BoardWriteUI from "./BoardWrite.presenter";
-import { CREATE_BOARD, UPDATE_BOARD, FETCH_BOARD } from "./BoardWrite.queries";
-import { IBoardWriteProps } from "./BoardWrite.types";
-import {
-  IMutation,
-  IMutationCreateBoardArgs,
-  IMutationUpdateBoardArgs,
-} from "../../../../commons/types/generated/types";
-import { removeClientSetsFromDocument } from "@apollo/client/utilities";
+import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useMutation } from "@apollo/client";
+import { useRouter } from "next/router";
+import { IBoardWriteProps, IMyUpdateBoardInput } from "./BoardWrite.types";
 
 export default function BoardWrite(props: IBoardWriteProps) {
   const router = useRouter();
 
-  const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
+  const [myWriter, setMyWriter] = useState("");
+  const [myPassword, setMyPassword] = useState("");
+  const [myTitle, setMyTitle] = useState("");
+  const [myContents, setMyContents] = useState("");
   const [youtubeUrl, setYoutubeUrl] = useState("");
-  const [myAddress, setMyAddress] = useState("");
-  const [myZonecode, setMyZonecode] = useState("");
-  const [optionalAddress, setOptionalAddress] = useState("");
-  const [images, setImages] = useState(["", "", ""]);
+  const [zipcode, setZipcode] = useState("");
+  const [address, setAddress] = useState("");
+  const [addressDetail, setAddressDetail] = useState("");
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
-  const [nameError, setNameError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [titleError, setTitleError] = useState("");
-  const [contentError, setContentError] = useState("");
+  const [myWriterError, setMyWriterError] = useState("");
+  const [myPasswordError, setMyPasswordError] = useState("");
+  const [myTitleError, setMyTitleError] = useState("");
+  const [myContentsError, setMyContentsError] = useState("");
 
-  const [changeBtnBC, setChangeBtnBC] = useState(false);
-  const [changeBtnColor, setChangeBtnColor] = useState(false);
-  const [select, setSelect] = useState("optionA");
+  const [isActive, setIsActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  /// 사진 업로드 //
-  function onChangeFileUrls(fileUrl: string, index: number) {
-    const newFileUrls = [...images];
-    newFileUrls[index] = fileUrl;
-    setImages(newFileUrls);
-  }
+  const [createBoard] = useMutation(CREATE_BOARD);
+  const [updateBoard] = useMutation(UPDATE_BOARD);
 
-  /////////////////////////////////////////////
-
-  function handleSelectChange(event: ChangeEvent<HTMLInputElement>) {
-    const value = event.target.value;
-    setSelect(value);
-  }
-
-  const myInputs = {
-    writer: name,
-    password: password,
-    title: title,
-    contents: content,
-    youtubeUrl: youtubeUrl,
-    images: images,
-    boardAddress: {
-      zipcode: myZonecode,
-      address: myAddress,
-      addressDetail: optionalAddress,
-    },
-  };
-
-  const [createBoard] = useMutation<
-    Pick<IMutation, "createBoard">,
-    IMutationCreateBoardArgs
-  >(CREATE_BOARD);
-
-  const [updateBoard] = useMutation<
-    Pick<IMutation, "updateBoard">,
-    IMutationUpdateBoardArgs
-  >(UPDATE_BOARD);
-
-  const { data } = useQuery(FETCH_BOARD, {
-    variables: { boardId: router.query.myId },
-  });
-
-  // const [fetchBoard] = useQuery(FETCH_BOARD);
-
-  console.log(createBoard);
-
-  function saveName(event: ChangeEvent<HTMLInputElement>) {
-    setName(event.target.value);
-    if (event.target.value) {
-      setNameError("");
+  function onChangeMyWriter(event: ChangeEvent<HTMLInputElement>) {
+    setMyWriter(event.target.value);
+    if (event.target.value !== "") {
+      setMyWriterError("");
     }
-    if (event.target.value && password && title && content) {
-      setChangeBtnBC(true);
-      setChangeBtnColor(true);
+
+    if (
+      event.target.value !== "" &&
+      myTitle !== "" &&
+      myContents !== "" &&
+      myPassword !== ""
+    ) {
+      setIsActive(true);
     } else {
-      setChangeBtnBC(false);
-      setChangeBtnColor(false);
+      setIsActive(false);
     }
   }
 
-  function savePassword(event: ChangeEvent<HTMLInputElement>) {
-    setPassword(event.target.value);
-    if (event.target.value) {
-      setPasswordError("");
+  function onChangeMyPassword(event: ChangeEvent<HTMLInputElement>) {
+    setMyPassword(event.target.value);
+    if (event.target.value !== "") {
+      setMyPasswordError("");
     }
-    if (name && event.target.value && title && content) {
-      setChangeBtnBC(true);
-      setChangeBtnColor(true);
+
+    if (
+      myWriter !== "" &&
+      myTitle !== "" &&
+      myContents !== "" &&
+      event.target.value !== ""
+    ) {
+      setIsActive(true);
     } else {
-      setChangeBtnBC(false);
-      setChangeBtnColor(false);
+      setIsActive(false);
     }
   }
 
-  function saveTitle(event: ChangeEvent<HTMLInputElement>) {
-    setTitle(event.target.value);
-    if (event.target.value) {
-      setTitleError("");
+  function onChangeMyTitle(event: ChangeEvent<HTMLInputElement>) {
+    setMyTitle(event.target.value);
+    if (event.target.value !== "") {
+      setMyTitleError("");
     }
-    if (name && password && event.target.value && content) {
-      setChangeBtnBC(true);
-      setChangeBtnColor(true);
+
+    if (
+      myWriter !== "" &&
+      event.target.value !== "" &&
+      myContents !== "" &&
+      myPassword !== ""
+    ) {
+      setIsActive(true);
     } else {
-      setChangeBtnBC(false);
-      setChangeBtnColor(false);
+      setIsActive(false);
     }
   }
 
-  function saveContent(event: ChangeEvent<HTMLInputElement>) {
-    setContent(event.target.value);
-
-    if (event.target.value) {
-      setContentError("");
+  function onChangeMyContents(event: ChangeEvent<HTMLTextAreaElement>) {
+    setMyContents(event.target.value);
+    if (event.target.value !== "") {
+      setMyContentsError("");
     }
-    if (name && password && title && event.target.value) {
-      setChangeBtnBC(true);
-      setChangeBtnColor(true);
+
+    if (
+      myWriter !== "" &&
+      myTitle !== "" &&
+      event.target.value !== "" &&
+      myPassword !== ""
+    ) {
+      setIsActive(true);
     } else {
-      setChangeBtnBC(false);
-      setChangeBtnColor(false);
+      setIsActive(false);
     }
   }
 
-  function saveYoutubeUrl(event: ChangeEvent<HTMLInputElement>) {
+  function onChangeMyYoutubeUrl(event: ChangeEvent<HTMLInputElement>) {
     setYoutubeUrl(event.target.value);
   }
 
-  async function checkValid() {
-    if (!name) {
-      setNameError("이름을 입력해주세요.");
-    }
+  function onChangeAddressDetail(event: ChangeEvent<HTMLInputElement>) {
+    setAddressDetail(event.target.value);
+  }
 
-    if (!password) {
-      setPasswordError("비밀번호를 입력해주세요.");
-    }
+  function onClickAddressSearch() {
+    setIsOpen(true);
+  }
 
-    if (!title) {
-      setTitleError("제목을 작성해주세요.");
-    }
+  function onCompleteAddressSearch(data: any) {
+    setAddress(data.address);
+    setZipcode(data.zonecode);
+    setIsOpen(false);
+  }
 
-    if (!content) {
-      setContentError("내용을 작성해주세요.");
+  async function onClickSubmit() {
+    if (!myWriter) {
+      setMyWriterError("작성자를 입력해주세요.");
     }
-    if (name && password && title && content) {
+    if (!myPassword) {
+      setMyPasswordError("비밀번호를 입력해주세요.");
+    }
+    if (!myTitle) {
+      setMyTitleError("제목을 입력해주세요.");
+    }
+    if (!myContents) {
+      setMyContentsError("내용을 입력해주세요.");
+    }
+    if (myWriter && myPassword && myTitle && myContents) {
       const result = await createBoard({
         variables: {
           createBoardInput: {
-            ...myInputs,
+            writer: myWriter,
+            password: myPassword,
+            title: myTitle,
+            contents: myContents,
+            youtubeUrl: youtubeUrl,
+            boardAddress: {
+              zipcode: zipcode,
+              address: address,
+              addressDetail: addressDetail,
+            },
+            images: fileUrls,
           },
         },
       });
-
-      router.push(`/boards/${result.data?.createBoard._id}`);
+      router.push(`/boards/${result.data.createBoard._id}`);
     }
   }
 
-  ////////// 수정하기 ~~~~ ////////
-  console.log(router.query.myId);
-  async function editBoard() {
-    const myVariablesForEdit = {
-      updateBoardInput: {},
-      password,
-      boardId: router.query.myId,
-    };
-
-    if (title) {
-      myVariablesForEdit.updateBoardInput.title = title;
-    } else {
-      myVariablesForEdit.updateBoardInput.title = data.fetchBoard.title;
+  async function onClickUpdate() {
+    if (
+      !myTitle &&
+      !myContents &&
+      !youtubeUrl &&
+      !address &&
+      !addressDetail &&
+      !zipcode
+    ) {
+      alert("수정된 내용이 없습니다.");
+      return;
     }
 
-    if (content) {
-      myVariablesForEdit.updateBoardInput.contents = content;
-    } else {
-      myVariablesForEdit.updateBoardInput.contents = data.fetchBoard.contents;
-    }
-
-    if (youtubeUrl) {
-      myVariablesForEdit.updateBoardInput.youtubeUrl = youtubeUrl;
-    } else {
-      myVariablesForEdit.updateBoardInput.youtubeUrl =
-        data.fetchBoard.youtubeUrl;
-    }
-
-    if (images) {
-      myVariablesForEdit.updateBoardInput.images = images;
-    } else {
-      myVariablesForEdit.updateBoardInput.images = data.fetchBoard.images;
+    const myUpdateboardInput: IMyUpdateBoardInput = { images: fileUrls };
+    if (myTitle) myUpdateboardInput.title = myTitle;
+    if (myContents) myUpdateboardInput.contents = myContents;
+    if (youtubeUrl) myUpdateboardInput.youtubeUrl = youtubeUrl;
+    if (zipcode || address || addressDetail) {
+      myUpdateboardInput.boardAddress = {};
+      if (zipcode) myUpdateboardInput.boardAddress.zipcode = zipcode;
+      if (address) myUpdateboardInput.boardAddress.address = address;
+      if (addressDetail)
+        myUpdateboardInput.boardAddress.addressDetail = addressDetail;
     }
 
     try {
       await updateBoard({
-        variables: myVariablesForEdit,
+        variables: {
+          boardId: router.query.boardId,
+          password: myPassword,
+          updateBoardInput: myUpdateboardInput,
+        },
       });
-      router.push(`/boards/${router.query.myId}`);
+      router.push(`/boards/${router.query.boardId}`);
     } catch (error) {
       alert(error.message);
     }
   }
 
-  //// 우편번호 모달////
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    setIsModalVisible(true);
-  };
-
-  const handleOk = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
-
-  const handleComplete = (data: any) => {
-    console.log(data.roadAddress);
-    // 모달 종료하기
-    setMyAddress(data.address);
-    setMyZonecode(data.zonecode);
-    setIsModalVisible(false);
-  };
-
-  function onChangeOptionalAddress(event: ChangeEvent<HTMLInputElement>) {
-    setOptionalAddress(event.target.value);
+  function onChangeFileUrls(fileUrl: string, index: number) {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
   }
+
+  useEffect(() => {
+    if (props.data?.fetchBoard.images?.length) {
+      setFileUrls([...props.data?.fetchBoard.images]);
+    }
+  }, [props.data]);
 
   return (
     <BoardWriteUI
-      saveName={saveName}
-      savePassword={savePassword}
-      saveTitle={saveTitle}
-      saveContent={saveContent}
-      nameError={nameError}
-      passwordError={passwordError}
-      titleError={titleError}
-      contentError={contentError}
-      checkValid={checkValid}
-      changeBtnBC={changeBtnBC}
-      isEdit={props.isEdit}
-      editBoard={editBoard}
-      bbb={changeBtnColor}
-      data={data}
-      saveYoutubeUrl={saveYoutubeUrl}
-      showModal={showModal}
-      handleOk={handleOk}
-      handleCancel={handleCancel}
-      handleComplete={handleComplete}
-      isModalVisible={isModalVisible}
-      myAddress={myAddress}
-      myZonecode={myZonecode}
-      onChangeOptionalAddress={onChangeOptionalAddress}
-      optionalAddress={optionalAddress}
-      select={select}
-      handleSelectChange={handleSelectChange}
+      myWriterError={myWriterError}
+      myPasswordError={myPasswordError}
+      myTitleError={myTitleError}
+      myContentsError={myContentsError}
+      onChangeMyWriter={onChangeMyWriter}
+      onChangeMyPassword={onChangeMyPassword}
+      onChangeMyTitle={onChangeMyTitle}
+      onChangeMyContents={onChangeMyContents}
+      onChangeMyYoutubeUrl={onChangeMyYoutubeUrl}
+      onChangeAddressDetail={onChangeAddressDetail}
+      onClickSubmit={onClickSubmit}
+      onClickUpdate={onClickUpdate}
+      onClickAddressSearch={onClickAddressSearch}
+      onCompleteAddressSearch={onCompleteAddressSearch}
       onChangeFileUrls={onChangeFileUrls}
-      images={images}
-    ></BoardWriteUI>
+      isActive={isActive}
+      isEdit={props.isEdit}
+      isOpen={isOpen}
+      data={props.data}
+      zipcode={zipcode}
+      address={address}
+      addressDetail={addressDetail}
+      fileUrls={fileUrls}
+    />
   );
 }

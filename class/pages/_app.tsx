@@ -11,15 +11,20 @@ import { globalStyles } from "../src/commons/styles/globalStyles";
 import Layout from "../src/components/commons/layout";
 import { createUploadLink } from "apollo-upload-client";
 
-// firebase 설정
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { createContext, useState } from "react";
+import {
+  createContext,
+  Dispatch,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
+import router from "next/router";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyB9x8eiIZ9ZrdVrcBLv1RRKt8a7kw7KzFk",
   authDomain: "virtual-firefly-329807.firebaseapp.com",
@@ -33,32 +38,36 @@ const firebaseConfig = {
 // Initialize Firebase
 export const firebaseApp = initializeApp(firebaseConfig);
 
-export const GlobalContext = createContext(null);
-
-/* 
- img를 업데이트하기위해 apollo-upload-client설치
- typescript 설치 yarn add @types/apollo-upload-client 
- */
-
+interface IGlobalContext {
+  accessToken?: string;
+  setAccessToken?: Dispatch<SetStateAction<string>>;
+}
+export const GlobalContext = createContext<IGlobalContext>({});
 function MyApp({ Component, pageProps }: AppProps) {
-  const [myAaccessToken, setMyAccessToken] = useState("");
-  const [myuserInfo, setMyUserInfo] = useState({});
+  const [myAccessToken, setMyAccessToken] = useState("");
+  // const [myUserInfo, setMyUserInfo] = useState({});
   const myValue = {
-    accessToken: myAaccessToken,
+    accessToken: myAccessToken,
     setAccessToken: setMyAccessToken,
-    userInfo: myuserInfo,
-    setUserInfo: setMyUserInfo,
+    // userInfo: myUserInfo,
+    // setUserInfo: setMyUserInfo,
   };
 
-  const uploadlink = createUploadLink({
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken") || "";
+    if (accessToken) setMyAccessToken(accessToken);
+  }, []);
+
+  const uploadLink = createUploadLink({
     uri: "http://backend04.codebootcamp.co.kr/graphql",
-    headers: { authorization: `Bearer ${myAaccessToken}` },
+    headers: { authorization: `Bearer ${myAccessToken}` },
   });
 
   const client = new ApolloClient({
-    link: ApolloLink.from([uploadlink as unknown as ApolloLink]),
-    cache: new InMemoryCache(), // state
+    link: ApolloLink.from([uploadLink as unknown as ApolloLink]),
+    cache: new InMemoryCache(),
   });
+
   return (
     <GlobalContext.Provider value={myValue}>
       <ApolloProvider client={client}>

@@ -1,5 +1,4 @@
 export type Maybe<T> = T | null;
-export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = {
   [K in keyof T]: T[K];
 };
@@ -51,9 +50,9 @@ export type IBoardAddress = {
 };
 
 export type IBoardAddressInput = {
-  address?: InputMaybe<Scalars["String"]>;
-  addressDetail?: InputMaybe<Scalars["String"]>;
-  zipcode?: InputMaybe<Scalars["String"]>;
+  address?: Maybe<Scalars["String"]>;
+  addressDetail?: Maybe<Scalars["String"]>;
+  zipcode?: Maybe<Scalars["String"]>;
 };
 
 export type IBoardComment = {
@@ -70,29 +69,29 @@ export type IBoardComment = {
 
 export type ICreateBoardCommentInput = {
   contents: Scalars["String"];
-  password?: InputMaybe<Scalars["String"]>;
+  password?: Maybe<Scalars["String"]>;
   rating: Scalars["Float"];
-  writer?: InputMaybe<Scalars["String"]>;
+  writer?: Maybe<Scalars["String"]>;
 };
 
 export type ICreateBoardInput = {
-  boardAddress?: InputMaybe<IBoardAddressInput>;
+  boardAddress?: Maybe<IBoardAddressInput>;
   contents: Scalars["String"];
-  images?: InputMaybe<Array<Scalars["String"]>>;
-  password?: InputMaybe<Scalars["String"]>;
+  images?: Maybe<Array<Scalars["String"]>>;
+  password?: Maybe<Scalars["String"]>;
   title: Scalars["String"];
-  writer?: InputMaybe<Scalars["String"]>;
-  youtubeUrl?: InputMaybe<Scalars["String"]>;
+  writer?: Maybe<Scalars["String"]>;
+  youtubeUrl?: Maybe<Scalars["String"]>;
 };
 
 export type ICreateUseditemInput = {
   contents: Scalars["String"];
-  images?: InputMaybe<Array<Scalars["String"]>>;
+  images?: Maybe<Array<Scalars["String"]>>;
   name: Scalars["String"];
   price: Scalars["Int"];
   remarks: Scalars["String"];
-  tags?: InputMaybe<Array<Scalars["String"]>>;
-  useditemAddress?: InputMaybe<IUseditemAddressInput>;
+  tags?: Maybe<Array<Scalars["String"]>>;
+  useditemAddress?: Maybe<IUseditemAddressInput>;
 };
 
 export type ICreateUseditemQuestionAnswerInput = {
@@ -194,7 +193,7 @@ export type IMutationDeleteBoardArgs = {
 
 export type IMutationDeleteBoardCommentArgs = {
   boardCommentId: Scalars["ID"];
-  password?: InputMaybe<Scalars["String"]>;
+  password?: Maybe<Scalars["String"]>;
 };
 
 export type IMutationDeleteBoardsArgs = {
@@ -241,13 +240,13 @@ export type IMutationToggleUseditemPickArgs = {
 
 export type IMutationUpdateBoardArgs = {
   boardId: Scalars["ID"];
-  password?: InputMaybe<Scalars["String"]>;
+  password?: Maybe<Scalars["String"]>;
   updateBoardInput: IUpdateBoardInput;
 };
 
 export type IMutationUpdateBoardCommentArgs = {
   boardCommentId: Scalars["ID"];
-  password?: InputMaybe<Scalars["String"]>;
+  password?: Maybe<Scalars["String"]>;
   updateBoardCommentInput: IUpdateBoardCommentInput;
 };
 
@@ -325,40 +324,40 @@ export type IQueryFetchBoardArgs = {
 
 export type IQueryFetchBoardCommentsArgs = {
   boardId: Scalars["ID"];
-  page?: InputMaybe<Scalars["Int"]>;
+  page?: Maybe<Scalars["Int"]>;
 };
 
 export type IQueryFetchBoardsArgs = {
-  endDate?: InputMaybe<Scalars["DateTime"]>;
-  page?: InputMaybe<Scalars["Int"]>;
-  search?: InputMaybe<Scalars["String"]>;
-  startDate?: InputMaybe<Scalars["DateTime"]>;
+  endDate?: Maybe<Scalars["DateTime"]>;
+  page?: Maybe<Scalars["Int"]>;
+  search?: Maybe<Scalars["String"]>;
+  startDate?: Maybe<Scalars["DateTime"]>;
 };
 
 export type IQueryFetchBoardsCountArgs = {
-  endDate?: InputMaybe<Scalars["DateTime"]>;
-  search?: InputMaybe<Scalars["String"]>;
-  startDate?: InputMaybe<Scalars["DateTime"]>;
+  endDate?: Maybe<Scalars["DateTime"]>;
+  search?: Maybe<Scalars["String"]>;
+  startDate?: Maybe<Scalars["DateTime"]>;
 };
 
 export type IQueryFetchPointTransactionsArgs = {
-  page?: InputMaybe<Scalars["Int"]>;
-  search?: InputMaybe<Scalars["String"]>;
+  page?: Maybe<Scalars["Int"]>;
+  search?: Maybe<Scalars["String"]>;
 };
 
 export type IQueryFetchPointTransactionsOfBuyingArgs = {
-  page?: InputMaybe<Scalars["Int"]>;
-  search?: InputMaybe<Scalars["String"]>;
+  page?: Maybe<Scalars["Int"]>;
+  search?: Maybe<Scalars["String"]>;
 };
 
 export type IQueryFetchPointTransactionsOfLoadingArgs = {
-  page?: InputMaybe<Scalars["Int"]>;
-  search?: InputMaybe<Scalars["String"]>;
+  page?: Maybe<Scalars["Int"]>;
+  search?: Maybe<Scalars["String"]>;
 };
 
 export type IQueryFetchPointTransactionsOfSellingArgs = {
-  page?: InputMaybe<Scalars["Int"]>;
-  search?: InputMaybe<Scalars["String"]>;
+  page?: Maybe<Scalars["Int"]>;
+  search?: Maybe<Scalars["String"]>;
 };
 
 export type IQueryFetchUseditemArgs = {
@@ -366,34 +365,34 @@ export type IQueryFetchUseditemArgs = {
 };
 
 export type IQueryFetchUseditemQuestionAnswersArgs = {
-  page?: InputMaybe<Scalars["Int"]>;
+  page?: Maybe<Scalars["Int"]>;
   useditemQuestionId: Scalars["ID"];
 };
 
 export type IQueryFetchUseditemQuestionsArgs = {
-  page?: InputMaybe<Scalars["Int"]>;
+  page?: Maybe<Scalars["Int"]>;
   useditemId: Scalars["ID"];
 };
 
 export type IQueryFetchUseditemsArgs = {
-  isSoldout?: InputMaybe<Scalars["Boolean"]>;
-  page?: InputMaybe<Scalars["Int"]>;
-  search?: InputMaybe<Scalars["String"]>;
+  isSoldout?: Maybe<Scalars["Boolean"]>;
+  page?: Maybe<Scalars["Int"]>;
+  search?: Maybe<Scalars["String"]>;
 };
 
 export type IQueryFetchUseditemsIBoughtArgs = {
-  page?: InputMaybe<Scalars["Int"]>;
-  search?: InputMaybe<Scalars["String"]>;
+  page?: Maybe<Scalars["Int"]>;
+  search?: Maybe<Scalars["String"]>;
 };
 
 export type IQueryFetchUseditemsIPickedArgs = {
-  page?: InputMaybe<Scalars["Int"]>;
-  search?: InputMaybe<Scalars["String"]>;
+  page?: Maybe<Scalars["Int"]>;
+  search?: Maybe<Scalars["String"]>;
 };
 
 export type IQueryFetchUseditemsISoldArgs = {
-  page?: InputMaybe<Scalars["Int"]>;
-  search?: InputMaybe<Scalars["String"]>;
+  page?: Maybe<Scalars["Int"]>;
+  search?: Maybe<Scalars["String"]>;
 };
 
 export type IToken = {
@@ -402,26 +401,26 @@ export type IToken = {
 };
 
 export type IUpdateBoardCommentInput = {
-  contents?: InputMaybe<Scalars["String"]>;
-  rating?: InputMaybe<Scalars["Float"]>;
+  contents?: Maybe<Scalars["String"]>;
+  rating?: Maybe<Scalars["Float"]>;
 };
 
 export type IUpdateBoardInput = {
-  boardAddress?: InputMaybe<IBoardAddressInput>;
-  contents?: InputMaybe<Scalars["String"]>;
-  images?: InputMaybe<Array<Scalars["String"]>>;
-  title?: InputMaybe<Scalars["String"]>;
-  youtubeUrl?: InputMaybe<Scalars["String"]>;
+  boardAddress?: Maybe<IBoardAddressInput>;
+  contents?: Maybe<Scalars["String"]>;
+  images?: Maybe<Array<Scalars["String"]>>;
+  title?: Maybe<Scalars["String"]>;
+  youtubeUrl?: Maybe<Scalars["String"]>;
 };
 
 export type IUpdateUseditemInput = {
-  contents?: InputMaybe<Scalars["String"]>;
-  images?: InputMaybe<Array<Scalars["String"]>>;
-  name?: InputMaybe<Scalars["String"]>;
-  price?: InputMaybe<Scalars["Int"]>;
-  remarks?: InputMaybe<Scalars["String"]>;
-  tags?: InputMaybe<Array<Scalars["String"]>>;
-  useditemAddress?: InputMaybe<IUseditemAddressInput>;
+  contents?: Maybe<Scalars["String"]>;
+  images?: Maybe<Array<Scalars["String"]>>;
+  name?: Maybe<Scalars["String"]>;
+  price?: Maybe<Scalars["Int"]>;
+  remarks?: Maybe<Scalars["String"]>;
+  tags?: Maybe<Array<Scalars["String"]>>;
+  useditemAddress?: Maybe<IUseditemAddressInput>;
 };
 
 export type IUpdateUseditemQuestionAnswerInput = {
@@ -433,8 +432,8 @@ export type IUpdateUseditemQuestionInput = {
 };
 
 export type IUpdateUserInput = {
-  name?: InputMaybe<Scalars["String"]>;
-  picture?: InputMaybe<Scalars["String"]>;
+  name?: Maybe<Scalars["String"]>;
+  picture?: Maybe<Scalars["String"]>;
 };
 
 export type IUseditem = {
@@ -470,11 +469,11 @@ export type IUseditemAddress = {
 };
 
 export type IUseditemAddressInput = {
-  address?: InputMaybe<Scalars["String"]>;
-  addressDetail?: InputMaybe<Scalars["String"]>;
-  lat?: InputMaybe<Scalars["Float"]>;
-  lng?: InputMaybe<Scalars["Float"]>;
-  zipcode?: InputMaybe<Scalars["String"]>;
+  address?: Maybe<Scalars["String"]>;
+  addressDetail?: Maybe<Scalars["String"]>;
+  lat?: Maybe<Scalars["Float"]>;
+  lng?: Maybe<Scalars["Float"]>;
+  zipcode?: Maybe<Scalars["String"]>;
 };
 
 export type IUseditemQuestion = {

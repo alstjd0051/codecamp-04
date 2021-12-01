@@ -1,7 +1,6 @@
 import { useRouter } from "next/dist/client/router";
-import { ReactNode } from "react";
-import Banner from "./banner/Banner.container";
-import Header from "./header/Header.container";
+import React, { ReactNode } from "react";
+import Nav from "./navigation/Nav.container";
 
 interface ILayoutProps {
   children: ReactNode;
@@ -9,12 +8,10 @@ interface ILayoutProps {
 
 export default function Layout(props: ILayoutProps) {
   const router = useRouter();
-
   return (
     <>
-      <Header />
-      <Banner />
       <div>{props.children} </div>
+      <Nav />
     </>
   );
 }

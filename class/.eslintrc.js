@@ -15,6 +15,12 @@ module.exports = {
   plugins: ["react", "@typescript-eslint"],
   rules: {
     "react/react-in-jsx-scope": "off",
-    "react/props-types": "off"
+    "react/props-types": "off",
+    "react/display-name": "off",
+    "no-unused-vars": "off"
   }
 };
+
+/* 
+
+ */
