@@ -6,6 +6,7 @@ import {
 } from "../../src/commons/types/generated/types";
 import { GlobalContext } from "../_app";
 import { useRouter } from "next/router";
+import axios from "axios";
 
 const LOGIN_USER = gql`
   mutation loginUser($email: String!, $password: String!) {
@@ -46,6 +47,11 @@ export default function LoginPage() {
       result.data?.loginUser.accessToken || ""
     );
     setAccessToken?.(result.data?.loginUser.accessToken || ""); // 여기서 setAccesToken 필요! (글로벌 스테이트에...)
+
+    // useApolloClient
+    // const result = await axios.get("koreanjson.com/posts/1") //이러한 방식으로 원하는 곳에서 useQuery 필요
+    // const result = fetchUserLoggedIn()
+    // setUserInfo(result.data?.fetchUserLogggedIn)
 
     // 로그인 성공된 페이지로 이동시키기!!!
     router.push("/23-05-login-success");

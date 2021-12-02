@@ -8,7 +8,11 @@ export const Wrapper = styled.div`
 
 export const PencilIcon = styled.img``;
 
-export const Star = styled(Rate)``;
+export const Star = styled(Rate)`
+  padding-left: 20px;
+  align-self: center;
+  justify-self: center;
+`;
 
 export const InputWrapper = styled.div`
   display: flex;
