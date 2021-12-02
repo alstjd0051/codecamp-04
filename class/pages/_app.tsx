@@ -20,7 +20,6 @@ import {
   useEffect,
   useState,
 } from "react";
-import router from "next/router";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -41,27 +40,33 @@ export const firebaseApp = initializeApp(firebaseConfig);
 interface IGlobalContext {
   accessToken?: string;
   setAccessToken?: Dispatch<SetStateAction<string>>;
+  userInfo?: {
+    name?: string;
+    email?: string;
+    picture?: string;
+  };
+  setUserInfo?: Dispatch<SetStateAction<{}>>;
 }
 export const GlobalContext = createContext<IGlobalContext>({});
 function MyApp({ Component, pageProps }: AppProps) {
   const [myAccessToken, setMyAccessToken] = useState("");
-  // const [myUserInfo, setMyUserInfo] = useState({});
+  const [myUserInfo, setMyUserInfo] = useState({});
   const myValue = {
     accessToken: myAccessToken,
     setAccessToken: setMyAccessToken,
-    // userInfo: myUserInfo,
-    // setUserInfo: setMyUserInfo,
+    userInfo: myUserInfo,
+    setUserInfo: setMyUserInfo,
   };
-
-  useEffect(() => {
-    const accessToken = localStorage.getItem("accessToken") || "";
-    if (accessToken) setMyAccessToken(accessToken);
-  }, []);
 
   const uploadLink = createUploadLink({
     uri: "http://backend04.codebootcamp.co.kr/graphql",
     headers: { authorization: `Bearer ${myAccessToken}` },
   });
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem("accessToken") || "";
+    if (accessToken) setMyAccessToken(accessToken);
+  }, []);
 
   const client = new ApolloClient({
     link: ApolloLink.from([uploadLink as unknown as ApolloLink]),
