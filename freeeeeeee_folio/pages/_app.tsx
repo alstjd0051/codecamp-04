@@ -10,6 +10,7 @@ import {
 } from "@apollo/client";
 import { Global } from "@emotion/react";
 import { createUploadLink } from "apollo-upload-client";
+import Particle from "../src/commons/libraries/Particle";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const uploadLink = createUploadLink({
@@ -24,6 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ApolloProvider client={client}>
       <Global styles={globalStyles} />
       <Layout>
+        <Particle />
         <Component {...pageProps} />
       </Layout>
     </ApolloProvider>

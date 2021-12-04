@@ -15,10 +15,10 @@ export default function Nav() {
     router.push("/boards");
   }
   function onClickSignUp() {
-    router.push("/signup");
+    router.push("/sign/signup");
   }
   function onClickSignIn() {
-    router.push("/signin");
+    router.push("/sign/signin");
   }
   function onClickMypage() {
     router.push("/mypage");
