@@ -1,6 +1,6 @@
 import { useRouter } from "next/dist/client/router";
 import React, { ReactNode, useState } from "react";
-import Nav from "./navigation/Nav.container";
+import Nav from "../commons/navigation/Nav.container";
 
 interface ILayoutProps {
   children: ReactNode;
@@ -8,11 +8,10 @@ interface ILayoutProps {
 
 export default function Layout(props: ILayoutProps) {
   const router = useRouter();
-  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <>
-      <div>{props.children} </div>
       <Nav />
+      <div>{props.children} </div>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import { globalStyles } from "../src/commons/styles/globalStyles";
-import Layout from "../src/components/commons/layout";
+import Layout from "../src/components/layout/layout";
 import {
   ApolloClient,
   ApolloLink,
