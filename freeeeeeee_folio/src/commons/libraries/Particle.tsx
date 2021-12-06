@@ -11,15 +11,11 @@ function Particle() {
         params={{
           autoPlay: true,
           background: {
-            color: {
-              value: "#ffffff",
-            },
-            image:
-              "url('http://vincentgarreau.com/particles.js/assets/img/kbLd9vb_new.gif')",
-            position: "0 90%",
+            image: "",
+            position: "50% 50%",
             repeat: "no-repeat",
-            size: "90%",
-            opacity: 0,
+            size: "cover",
+            opacity: 1,
           },
           backgroundMask: {
             composite: "destination-out",
@@ -33,7 +29,7 @@ function Particle() {
           },
           fullScreen: {
             enable: true,
-            zIndex: 1,
+            zIndex: 0,
           },
           detectRetina: true,
           duration: 0,
@@ -43,7 +39,7 @@ function Particle() {
             events: {
               onClick: {
                 enable: true,
-                mode: "repulse",
+                mode: "push",
               },
               onDiv: {
                 selectors: [],
@@ -53,7 +49,7 @@ function Particle() {
               },
               onHover: {
                 enable: false,
-                mode: "grab",
+                mode: "repulse",
                 parallax: {
                   enable: false,
                   force: 2,
@@ -78,7 +74,7 @@ function Particle() {
                 distance: 400,
                 duration: 2,
                 mix: false,
-                opacity: 8,
+                opacity: 0.8,
                 size: 40,
               },
               connect: {
@@ -89,7 +85,7 @@ function Particle() {
                 radius: 60,
               },
               grab: {
-                distance: 200,
+                distance: 400,
                 links: {
                   blink: false,
                   consent: false,
@@ -117,7 +113,7 @@ function Particle() {
               },
               push: {
                 default: true,
-                groups: [],
+                groups: ["z5000", "z7500", "z2500", "z1000"],
                 quantity: 4,
               },
               remove: {
@@ -198,7 +194,7 @@ function Particle() {
                   count: 0,
                   enable: false,
                   offset: 0,
-                  speed: 10,
+                  speed: 20,
                   sync: true,
                 },
                 s: {
@@ -242,7 +238,40 @@ function Particle() {
               },
             },
             gradient: [],
-            groups: {},
+            groups: {
+              z5000: {
+                number: {
+                  value: 70,
+                },
+                zIndex: {
+                  value: 50,
+                },
+              },
+              z7500: {
+                number: {
+                  value: 30,
+                },
+                zIndex: {
+                  value: 75,
+                },
+              },
+              z2500: {
+                number: {
+                  value: 50,
+                },
+                zIndex: {
+                  value: 25,
+                },
+              },
+              z1000: {
+                number: {
+                  value: 40,
+                },
+                zIndex: {
+                  value: 10,
+                },
+              },
+            },
             life: {
               count: 0,
               delay: {
@@ -268,7 +297,7 @@ function Particle() {
                 value: "#ffffff",
               },
               consent: false,
-              distance: 150,
+              distance: 100,
               enable: false,
               frequency: 1,
               opacity: 0.4,
@@ -289,7 +318,7 @@ function Particle() {
             move: {
               angle: {
                 offset: 0,
-                value: 90,
+                value: 10,
               },
               attract: {
                 distance: 200,
@@ -301,7 +330,7 @@ function Particle() {
               },
               decay: 0,
               distance: {},
-              direction: "left",
+              direction: "right",
               drift: 0,
               enable: true,
               gravity: {
@@ -331,12 +360,12 @@ function Particle() {
               },
               random: false,
               size: false,
-              speed: 6,
+              speed: 5,
               spin: {
                 acceleration: 0,
                 enable: false,
               },
-              straight: true,
+              straight: false,
               trail: {
                 enable: false,
                 length: 10,
@@ -354,18 +383,18 @@ function Particle() {
                 factor: 1000,
               },
               limit: 0,
-              value: 100,
+              value: 200,
             },
             opacity: {
               random: {
                 enable: false,
                 minimumValue: 0.1,
               },
-              value: 0.5,
+              value: 1,
               animation: {
                 count: 0,
                 enable: false,
-                speed: 1,
+                speed: 3,
                 sync: false,
                 destroy: "none",
                 startValue: "random",
@@ -442,30 +471,22 @@ function Particle() {
               },
             },
             shape: {
-              options: {
-                star: {
-                  sides: 5,
-                },
-              },
-              type: "star",
+              options: {},
+              type: "circle",
             },
             size: {
               random: {
-                enable: true,
+                enable: false,
                 minimumValue: 1,
               },
-              value: {
-                min: 1,
-                max: 4,
-              },
+              value: 3,
               animation: {
                 count: 0,
                 enable: false,
-                speed: 40,
+                speed: 5,
                 sync: false,
                 destroy: "none",
                 startValue: "random",
-                minimumValue: 0.1,
               },
             },
             stroke: {
@@ -507,8 +528,8 @@ function Particle() {
                 enable: false,
                 minimumValue: 0,
               },
-              value: 0,
-              opacityRate: 1,
+              value: 5,
+              opacityRate: 0.5,
               sizeRate: 1,
               velocityRate: 1,
             },
@@ -518,6 +539,65 @@ function Particle() {
           responsive: [],
           themes: [],
           zLayers: 100,
+          emitters: {
+            autoPlay: true,
+            fill: true,
+            life: {
+              wait: false,
+            },
+            rate: {
+              quantity: 1,
+              delay: 7,
+            },
+            shape: "square",
+            startCount: 0,
+            size: {
+              mode: "percent",
+              height: 0,
+              width: 0,
+            },
+            particles: {
+              shape: {
+                type: "images",
+                options: {
+                  images: {
+                    src: "https://particles.js.org/images/cyan_amongus.png",
+                    width: 500,
+                    height: 634,
+                  },
+                },
+              },
+              size: {
+                value: 40,
+              },
+              move: {
+                speed: 10,
+                outModes: {
+                  default: "none",
+                  right: "destroy",
+                },
+                straight: true,
+              },
+              zIndex: {
+                value: 0,
+              },
+              rotate: {
+                value: {
+                  min: 0,
+                  max: 360,
+                },
+                animation: {
+                  enable: true,
+                  speed: 10,
+                  sync: true,
+                },
+              },
+            },
+            position: {
+              x: -5,
+              y: 55,
+            },
+          },
         }}
       />
     </>
