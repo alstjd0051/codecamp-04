@@ -14,7 +14,7 @@ export default function LayoutHeaderUI(props: IProps) {
   return (
     <Wrapper>
       <InnerWrapper>
-        <InnerLogo onClick={props.onClickLogo}>💎 Woogie</InnerLogo>
+        <InnerLogo onClick={props.onClickLogo}>💎 Hello</InnerLogo>
         <div>
           <InnerButton onClick={props.onClickMoveToSignin}>Sign in</InnerButton>
           <InnerButton onClick={props.onClickMoveToSignup}>Sign up</InnerButton>

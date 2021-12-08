@@ -14,6 +14,7 @@ const CREATE_BOARD = gql`
 
 export default function GraphqlMutationBoard2Page() {
   const [createBoard] = useMutation(CREATE_BOARD)
+event;
 
   const zzz = async () => {
     const result = await createBoard({

@@ -11,7 +11,7 @@ export default function Layout(props: ILayoutProps) {
   return (
     <>
       <LayoutHeader />
-      <LayoutBanner />
+      {/* <LayoutBanner /> */}
       <LayoutNavigation />
       <div>{props.children}</div>
     </>
