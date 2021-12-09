@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <ApolloProvider client={client}>
       <Global styles={globalStyles} />
       <Layout>
-        <Particle />
+        {/* <Particle /> */}
         <Component {...pageProps} />
       </Layout>
     </ApolloProvider>

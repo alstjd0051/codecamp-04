@@ -1,3 +1,5 @@
+// import Head from "next/head";
+
 import {
   ApolloClient,
   ApolloProvider,
@@ -74,14 +76,22 @@ function MyApp({ Component, pageProps }: AppProps) {
   });
 
   return (
-    <GlobalContext.Provider value={myValue}>
-      <ApolloProvider client={client}>
-        <Global styles={globalStyles} />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ApolloProvider>
-    </GlobalContext.Provider>
+    <>
+      {/* <Head> 모든 페이지에서 카카오 맵을 다운로드 받으므로 비효율적임
+        <script
+          type="text/javascript"
+          src="//dapi.kakao.com/v2/maps/sdk.js?appkey=8eac908670bf2e1eae75892827acafb1"
+        ></script>
+      </Head> */}
+      <GlobalContext.Provider value={myValue}>
+        <ApolloProvider client={client}>
+          <Global styles={globalStyles} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ApolloProvider>
+      </GlobalContext.Provider>
+    </>
   );
 }
 
