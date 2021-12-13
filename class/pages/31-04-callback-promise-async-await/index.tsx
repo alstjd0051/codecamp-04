@@ -1,6 +1,3 @@
-# 12월 13일
-
-```jsx
 import axios from "axios";
 import { useState } from "react";
 
@@ -105,39 +102,3 @@ export default function CallbackPromiseAsyncAwaitPage() {
     </>
   );
 }
-```
-
-> ## callback
->
-> ```jsx
-> function aaa(arg1) {
->   console.log(arg1);
-> }
-> aaa(123);
-> aaa(function () {
->   console.log("123123123");
-> });
->
-> [1, 2, 3]
->   .map((el) => el + "어린이") // ['1어린이', '2어린이', '3어린이']
->
->   [(1, 2, 3)].map(function (el) {
->     return el + "어린이";
->   }); // ['1어린이', '2어린이', '3어린이']
->
-> function aaa(arg1) {
->   // 이런저런 로직
->   // 외부에 데이터 등록하기
->   arg1();
-> }
->
-> aaa(function () {
->   console.log("등록에 성공했습니다.");
-> });
-> ```
->
-> ### 인자로 들어가는 함수가 callback함수라고 한다.
-
-> ## Promise
-
-> ## Async/Await
