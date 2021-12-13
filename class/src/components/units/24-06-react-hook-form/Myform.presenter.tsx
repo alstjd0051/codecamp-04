@@ -11,17 +11,17 @@ export default function MyformUI(props) {
   });
 
   return (
-    <>
-      <form onSubmit={handleSubmit(props.onClickLogin)}>
-        이메일 : <Input01 aaa="text" bbb={register("myEmail")} />
-        {/* 이메일: <input type="text" {...props.register("myEmail")} /> */}
-        <div>{formState.errors.myEmail?.message}</div>
-        비밀번호 : <Input01 aaa="password" bbb={register("myPassword")} />
-        {/* 비밀번호: <input type="password" {...props.register("myPassword")} /> */}
-        <div>{formState.errors.myPassword?.message}</div>
-        <Button01 type="submit" name="로그인하기" isValid={formState.isValid} />
-        {/* <button isValid={props.forState.isValid}>로그인하기</button> */}
-      </form>
-    </>
+    <form onSubmit={handleSubmit(props.onClickLogin)}>
+      이메일: <Input01 aaa="text" bbb={register("myEmail")} />
+      {/* 이메일: <input type="text" {...props.register("myEmail")} /> */}
+      <div>{formState.errors.myEmail?.message}</div>
+      비밀번호: <Input01 aaa="password" bbb={register("myPassword")} />
+      {/* 비밀번호: <input type="password" {...props.register("myPassword")} /> */}
+      <div>{formState.errors.myPassword?.message}</div>
+      <Button01 type="submit" name="로그인하기" isValid={formState.isValid} />
+      {/* <button isValid={props.formState.isValid}>로그인하기</button> */}
+      {/* <button type="button" onClick={onClickMove}>목록으로 이동하기</button> */}
+      {/* <button type="reset">초기화하기</button> */}
+    </form>
   );
 }

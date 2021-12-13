@@ -1,8 +1,8 @@
-import { ChangeEvent } from "react";
 import { MyInput, MyButton } from "./BoardWrite.styles";
-import { IBoardWriteUIPProps } from "./BoardWrite.types";
+import { IBoardWriteUIProps } from "./BoardWrite.types";
 
-export default function BoardWriteUI(props: IBoardWriteUIPProps) {
+export default function BoardWriteUI(props: IBoardWriteUIProps) {
+  console.log(props.data);
   return (
     <>
       작성자:{" "}

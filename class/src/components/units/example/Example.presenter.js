@@ -1,16 +1,13 @@
-import { withAuth } from "../../commons/hocs/withAuth.tsx";
+import { withAuth } from "../../commons/hocs/withAuth";
 
 function ExampleUI(props) {
-  console.log(props);
   return (
     <div>
-      <h1>{props.isEdit ? "수정" : "등록"}</h1>
-      <div>
-        제목 : <input type="text" />
-      </div>
-      <div>
-        내용 : <input type="text" />
-      </div>
+      <h1>{props.isEdit ? "수정" : "등록"}페이지</h1>
+      제목: <input type="text" />
+      <br />
+      내용: <input type="text" />
+      <br />
       <button>{props.isEdit ? "수정" : "등록"}하기</button>
     </div>
   );

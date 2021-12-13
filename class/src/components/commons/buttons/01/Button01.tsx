@@ -3,10 +3,9 @@ import styled from "@emotion/styled";
 interface IMyButtonProps {
   isValid: boolean;
 }
-
 const MyButton = styled.button`
   background-color: ${(props: IMyButtonProps) =>
-    props.isValid ? "yellow" : "gray"};
+    props.isValid ? "yellow" : ""};
 `;
 
 export default function Button01(props) {

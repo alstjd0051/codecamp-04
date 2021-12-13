@@ -1,65 +1,53 @@
+import BoardWriteUI from './BoardWrite.presenter'
 import { useMutation } from '@apollo/client'
 import { useState } from 'react'
-import BoardWriteUI from './BoardWrite.presenter'
 import { CREATE_BOARD } from './BoardWrite.queries'
 
 
-export default function BoardWrite() {
+export default function BoardWrite(){
+    const [myQqq, setMyQqq] = useState(false)
+    const [myWriter, setMyWriter] = useState("")
+    const [myTitle, setMyTitle] = useState("")
+    const [myContents, setMyContents] = useState("")
+    const [createBoard] = useMutation(CREATE_BOARD)
 
-  const [myQqq, setMyQqq] = useState(false)
-  const [myWriter, setMyWriter] = useState("")
-  const [myTitle, setMyTitle] = useState("")
-  const [myContent, setMyContent] = useState("")
-
-  const [createBoard] = useMutation(CREATE_BOARD)
-
-
-  function onChangeMyWriter(event) { //실무에서 많이쓰는 표현(onChange,Handler)
-    setMyWriter(event.target.value)
-    if (myWriter !== "" && myTitle !== "" && myContent !== "") {
-      setMyQqq(true)
-    } else {
-      setMyQqq(false)
+    function onChangeMyWriter(event){
+        setMyWriter(event.target.value)
+        if(event.target.value !== "" && myTitle !== "" && myContents !== ""){
+            setMyQqq(true)
+        }
     }
-  }
 
-  function onChangeMyTitle(event) {
-    setMyTitle(event.target.value)
-    if (myWriter !== "" && myTitle !== "" && myContent !== "") {
-      setMyQqq(true)
-    } else {
-      setMyQqq(false)
+    function onChangeMyTitle(event){
+        setMyTitle(event.target.value)
+        if(myWriter !== "" && event.target.value !== "" && myContents !== ""){
+            setMyQqq(true)
+        }
     }
-  }
 
-  function onChangeMyContents(event) {
-    setMyContent(event.target.value)
-    if (myWriter !== "" && myTitle !== "" && myContent !== "") {
-      setMyQqq(true)
-    } else {
-      setMyQqq(false)
+    function onChangeMyContents(event){
+        setMyContents(event.target.value)
+        if(myWriter !== "" && myTitle !== "" && event.target.value !== ""){
+            setMyQqq(true)
+        }
     }
-  }
 
-  async function zzz() {
-    const result = await createBoard({
-      variables: { writer: myWriter, title: myTitle, contents: myContent }
-    })
-    console.log(result)
-    console.log(result.data.createBoard.message)
-  }
+    async function zzz(){
+        const result = await createBoard({
+            variables: { writer: myWriter, title: myTitle, contents: myContents }
+        })
+        console.log(result)
+        console.log(result.data.createBoard.message)
+    }
 
-
-
-  return (
-    <BoardWriteUI
-      aaa={onChangeMyWriter}
-      bbb={onChangeMyTitle}
-      ccc={onChangeMyContents}
-      abc={zzz}
-      qwe={myQqq}
-
-    />
-  )
+    return (
+        <BoardWriteUI 
+            aaa={onChangeMyWriter}
+            bbb={onChangeMyTitle}
+            ccc={onChangeMyContents}
+            zzz={zzz}
+            qqq={myQqq}
+        />
+    )
 
 }

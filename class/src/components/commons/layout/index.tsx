@@ -6,21 +6,9 @@ import Navigation from "./navigation/Navigation.container";
 import Footer from "./footer/Footer.container";
 import { useRouter } from "next/router";
 
-interface ILayoutProps {
-  children: ReactChild;
-}
+const Wrapper = styled.div``;
 
-const Wrapper = styled.div`
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  background-color: skyblue;
-`;
-
-const Body = styled.div`
-  background-color: beige;
-  width: 1000px;
-`;
+const Body = styled.div``;
 
 const BodyWrapper = styled.div`
   display: flex;
@@ -29,28 +17,30 @@ const BodyWrapper = styled.div`
 const Sidebar = styled.div`
   width: 200px;
   height: 700px;
-  background-color: blueviolet;
+  background-color: blue;
 `;
 
 const HIDDEN_HEADERS = [
-  "/12-04-state-prev",
+  "/12-05-modal-address-state-prev",
   // ...
 ];
 
+interface ILayoutProps {
+  children: ReactChild;
+}
 export default function Layout(props: ILayoutProps) {
   const router = useRouter();
   console.log(router);
 
-  const isHIDDEN_Header = HIDDEN_HEADERS.includes(router.asPath);
+  const isHiddenHeader = HIDDEN_HEADERS.includes(router.asPath);
 
   return (
     <Wrapper>
-      {!isHIDDEN_Header && <Header />}
-
+      {!isHiddenHeader && <Header />}
       <Banner />
       <Navigation />
       <BodyWrapper>
-        <Sidebar>Sidebar</Sidebar>
+        <Sidebar>sidebar!!!</Sidebar>
         <Body>{props.children}</Body>
       </BodyWrapper>
       <Footer />
