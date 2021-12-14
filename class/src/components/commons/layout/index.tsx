@@ -17,7 +17,7 @@ const BodyWrapper = styled.div`
 const Sidebar = styled.div`
   width: 200px;
   height: 700px;
-  background-color: blue;
+  background-color: #8a8ac3;
 `;
 
 const HIDDEN_HEADERS = [
