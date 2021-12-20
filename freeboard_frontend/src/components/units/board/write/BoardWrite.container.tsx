@@ -1,6 +1,6 @@
-import BoardWriteUI from "./BoardWrite.Presenter";
+import BoardWriteUI from "./BoardWrite.presenter";
 import { CREATE_BOARD, UPDATE_BOARD } from "./BoardWrite.queries";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
 import { IBoardWriteProps, IMyUpdateBoardInput } from "./BoardWrite.types";
@@ -16,8 +16,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
-
-  const [images, setImages] = useState<string[]>([]);
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   const [myWriterError, setMyWriterError] = useState("");
   const [myPasswordError, setMyPasswordError] = useState("");
@@ -119,12 +118,6 @@ export default function BoardWrite(props: IBoardWriteProps) {
     setZipcode(data.zonecode);
     setIsOpen(false);
   }
-  function handleOk() {
-    setIsOpen((prev) => !prev);
-  }
-  function handleCancel() {
-    setIsOpen((prev) => !prev);
-  }
 
   async function onClickSubmit() {
     if (!myWriter) {
@@ -148,12 +141,12 @@ export default function BoardWrite(props: IBoardWriteProps) {
             title: myTitle,
             contents: myContents,
             youtubeUrl: youtubeUrl,
-            images,
             boardAddress: {
               zipcode: zipcode,
               address: address,
               addressDetail: addressDetail,
             },
+            images: fileUrls,
           },
         },
       });
@@ -174,7 +167,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       return;
     }
 
-    const myUpdateboardInput: IMyUpdateBoardInput = {};
+    const myUpdateboardInput: IMyUpdateBoardInput = { images: fileUrls };
     if (myTitle) myUpdateboardInput.title = myTitle;
     if (myContents) myUpdateboardInput.contents = myContents;
     if (youtubeUrl) myUpdateboardInput.youtubeUrl = youtubeUrl;
@@ -200,9 +193,20 @@ export default function BoardWrite(props: IBoardWriteProps) {
     }
   }
 
+  function onChangeFileUrls(fileUrl: string, index: number) {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
+  }
+
+  useEffect(() => {
+    if (props.data?.fetchBoard.images?.length) {
+      setFileUrls([...props.data?.fetchBoard.images]);
+    }
+  }, [props.data]);
+
   return (
     <BoardWriteUI
-      setImages={setImages}
       myWriterError={myWriterError}
       myPasswordError={myPasswordError}
       myTitleError={myTitleError}
@@ -217,6 +221,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       onClickUpdate={onClickUpdate}
       onClickAddressSearch={onClickAddressSearch}
       onCompleteAddressSearch={onCompleteAddressSearch}
+      onChangeFileUrls={onChangeFileUrls}
       isActive={isActive}
       isEdit={props.isEdit}
       isOpen={isOpen}
@@ -224,8 +229,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       zipcode={zipcode}
       address={address}
       addressDetail={addressDetail}
-      handleOk={handleOk}
-      handleCancel={handleCancel}
+      fileUrls={fileUrls}
     />
   );
 }

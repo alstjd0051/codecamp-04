@@ -7,17 +7,16 @@ import {
 
 interface IProps {
   onClickLogo: () => void;
-  onClickMoveToSignin: () => void;
-  onClickMoveToSignup: () => void;
+  onClickMoveToLogin: () => void;
 }
 export default function LayoutHeaderUI(props: IProps) {
   return (
     <Wrapper>
       <InnerWrapper>
-        <InnerLogo onClick={props.onClickLogo}>💎 Hello</InnerLogo>
+        <InnerLogo onClick={props.onClickLogo}>💎 LIVE</InnerLogo>
         <div>
-          <InnerButton onClick={props.onClickMoveToSignin}>Sign in</InnerButton>
-          <InnerButton onClick={props.onClickMoveToSignup}>Sign up</InnerButton>
+          <InnerButton onClick={props.onClickMoveToLogin}>로그인</InnerButton>
+          <InnerButton>회원가입</InnerButton>
         </div>
       </InnerWrapper>
     </Wrapper>

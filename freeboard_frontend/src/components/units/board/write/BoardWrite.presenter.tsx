@@ -19,24 +19,19 @@ import {
   Youtube,
   Zipcode,
   ZipcodeWrapper,
-  UploadButton,
-  UploadImage,
   Error,
 } from "./BoardWrite.styles";
 import { IBoardWriteUIProps } from "./BoardWrite.types";
 import { Modal } from "antd";
 import DaumPostcode from "react-daum-postcode";
-import UploadPreview from "../Image-upload-preview";
+import Uploads01 from "../../../commons/uploads/01/Uploads01.container";
+import { v4 as uuidv4 } from "uuid";
 
 export default function BoardWriteUI(props: IBoardWriteUIProps) {
   return (
     <>
       {props.isOpen && (
-        <Modal
-          visible={true}
-          onOk={props.handleOk}
-          onCancel={props.handleCancel}
-        >
+        <Modal visible={true}>
           <DaumPostcode onComplete={props.onCompleteAddressSearch} />
         </Modal>
       )}
@@ -83,7 +78,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
           <Label>주소</Label>
           <ZipcodeWrapper>
             <Zipcode
-              // placeholder="07250"
+              placeholder="07250"
               readOnly
               value={
                 props.zipcode ||
@@ -120,12 +115,15 @@ export default function BoardWriteUI(props: IBoardWriteUIProps) {
         </InputWrapper>
         <ImageWrapper>
           <Label>사진첨부</Label>
-          <UploadImage>
-            <UploadPreview />
-            <UploadPreview />
-            <UploadPreview />
-          </UploadImage>
-          {/* </UploadButton> */}
+          {props.fileUrls.map((el, index) => (
+            <Uploads01
+              key={uuidv4()}
+              index={index}
+              fileUrl={el}
+              defaultFileUrl={props.data?.fetchBoard.images?.[index]}
+              onChangeFileUrls={props.onChangeFileUrls}
+            />
+          ))}
         </ImageWrapper>
         <OptionWrapper>
           <Label>메인설정</Label>

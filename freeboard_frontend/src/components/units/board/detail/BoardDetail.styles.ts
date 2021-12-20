@@ -99,9 +99,7 @@ export const IconWrapper = styled.div`
   text-align: center;
 `;
 
-export const LinkIcon = styled.img`
-  margin-right: 30px;
-`;
+export const LinkIcon = styled.img``;
 
 export const LocationIcon = styled.img``;
 
@@ -125,4 +123,15 @@ export const LikeCount = styled.div`
 
 export const DislikeCount = styled.div`
   color: #828282;
+`;
+
+export const ImageWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+export const Image = styled.img`
+  width: 996px;
+  height: 480px;
+  margin-bottom: 30px;
 `;

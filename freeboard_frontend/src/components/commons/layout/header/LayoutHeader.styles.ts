@@ -1,10 +1,8 @@
 import styled from "@emotion/styled";
-import { Spin as Hamburger } from "hamburger-react";
 
 export const Wrapper = styled.div`
   height: 152px;
-  background-color: #484745;
-  /* background-color: #f5f2fc; */
+  background-color: #f5f2fc;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -25,13 +23,12 @@ export const InnerLogo = styled.div`
   font-weight: bold;
   font-family: "live";
   font-style: italic;
-  color: white;
-  /* color: #5729ff; */
+  color: #5729ff;
   cursor: pointer;
 `;
 
 export const InnerButton = styled.span`
   margin: 10px;
-  color: white;
+  color: #5729ff;
   cursor: pointer;
 `;

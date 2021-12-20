@@ -7,24 +7,22 @@ export default function LayoutBannerUI() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 1000,
+    speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000,
   };
 
   return (
     <Wrapper>
       <Slider {...settings}>
         <div>
-          <SliderItem src="/images/layout/developer.jpg" />
+          <SliderItem src="/images/layout/banner01.png" />
         </div>
         <div>
-          <SliderItem src="/images/layout/notebook.jpg" />
+          <SliderItem src="/images/layout/banner01.png" />
         </div>
         <div>
-          <SliderItem src="/images/layout/travel.jpg" />
+          <SliderItem src="/images/layout/banner01.png" />
         </div>
       </Slider>
     </Wrapper>

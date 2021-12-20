@@ -7,13 +7,6 @@ export const Column = styled.span`
 interface IPageProps {
   isActive?: boolean;
 }
-
-export const PageWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-`;
-
 export const Page = styled.span`
   margin: 0px 10px;
   color: ${(props: IPageProps) => (props.isActive ? "blue" : "black")};
