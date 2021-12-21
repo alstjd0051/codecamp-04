@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import Image from 'next/image'
 import {request,gql} from 'graphql-request'
 
 export default function markets(props) {
@@ -13,7 +12,6 @@ export default function markets(props) {
     </Head>
     <div>
         <h1>안녕하세요.상품페이지입니다.</h1>
-        <Image src="https://i.pinimg.com/564x/8e/e1/80/8ee1800da1d41552b8c93e028482f5fa.jpg" />
     </div>
     </>
   )
