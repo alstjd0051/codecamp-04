@@ -8,8 +8,8 @@ export default function markets(props) {
     <Head>
       <meta property="og:title" content={props.fetchUseditem.name} />
       {/* <meta property="og:url" content="http://miiinsseong.shop" /> */}
-      <meta property="org:image" content={props.fetchUseditem.remarks} />
-      <meta property="org:description" content="그대는 모나리자"/>
+      <meta property="og:image" content={props.fetchUseditem.remarks} />
+      <meta property="og:description" content="그대는 모나리자"/>
     </Head>
     <div>
         <h1>안녕하세요.상품페이지입니다.</h1>
