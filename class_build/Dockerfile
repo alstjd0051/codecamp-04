@@ -2,7 +2,7 @@ FROM node:16
 
 WORKDIR /class_build/
 COPY ./package.json/ /class_build/
-COPY ./yarnlock /class_build/
+COPY ./yarn.lock /class_build/
 RUN yarn install
 
 COPY . /class_build/
