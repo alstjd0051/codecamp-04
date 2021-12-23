@@ -56,3 +56,4 @@ CMD yarn start
 ```
 
 `docker-compose up -D` 도커를 백그라운드에서 사용
+`docker-compose logs` 도커로그를 확인하는 방법
