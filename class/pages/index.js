@@ -1,6 +1,16 @@
+import { useRouter } from "next/router";
 export default function Home() {
+  const router = useRouter();
+
+  function loginPage() {
+    router.push("/23-05-login-success");
+  }
   return (
-    <div />
+    <>
+      <div>
+        <button onClick={loginPage}> 로그인하기 </button>
+      </div>
+    </>
     // <div className={styles.container}>
     //   <Head>
     //     <title>Create Next App</title>
