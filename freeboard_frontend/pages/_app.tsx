@@ -19,12 +19,12 @@ import { initializeApp } from "firebase/app";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyBVlehebGH9EilvdWjqx2W1KAkl-UBI2TY",
-  authDomain: "codecamp-aa4c2.firebaseapp.com",
-  projectId: "codecamp-aa4c2",
-  storageBucket: "codecamp-aa4c2.appspot.com",
-  messagingSenderId: "434605305014",
-  appId: "1:434605305014:web:1674564dbd239a21124a17",
+  apiKey: "AIzaSyC16MzN8iVGqSHuzfbBncLMQWdIudE4SGY",
+  authDomain: "codecamp-22ad2.firebaseapp.com",
+  projectId: "codecamp-22ad2",
+  storageBucket: "codecamp-22ad2.appspot.com",
+  messagingSenderId: "254842019842",
+  appId: "1:254842019842:web:5a332d98081bf173f9871b",
 };
 
 // Initialize Firebase
@@ -32,7 +32,7 @@ export const firebaseApp = initializeApp(firebaseConfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
   const uploadLink = createUploadLink({
-    uri: "http://backend04.codebootcamp.co.kr/graphql",
+    uri: "http://backend07.codebootcamp.co.kr/graphql",
   });
 
   const client = new ApolloClient({

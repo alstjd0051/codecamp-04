@@ -2,7 +2,7 @@ import LayoutBanner from "./banner/LayoutBanner.container";
 import LayoutHeader from "./header/LayoutHeader.container";
 import LayoutNavigation from "./navigation/LayoutNavigation.container";
 import styled from "@emotion/styled";
-import { ReactNode } from "react";
+import { ReactElement } from "react";
 
 const Body = styled.div`
   height: 500px;
@@ -12,7 +12,7 @@ const Body = styled.div`
 `;
 
 interface ILayoutProps {
-  children: ReactNode;
+  children: ReactElement;
 }
 export default function Layout(props: ILayoutProps) {
   return (
