@@ -5,10 +5,15 @@ export default function Home() {
   function loginPage() {
     router.push("/23-05-login-success");
   }
+
+  function MoveToPaginNation() {
+    router.push("/14-01-pagination-basic");
+  }
   return (
     <>
       <div>
         <button onClick={loginPage}> 로그인하기 </button>
+        <button onClick={MoveToPaginNation}> pagination </button>
       </div>
     </>
     // <div className={styles.container}>
